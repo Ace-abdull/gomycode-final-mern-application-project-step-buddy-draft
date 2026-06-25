@@ -1,18 +1,28 @@
-# React + Vite
+# StepBuddy — Walking app prototype
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+StepBuddy is a UI prototype for a simple walking app landing page. It demonstrates a polished circular step counter, a small friends list, and a light/dark toggle. This repository is a front-end-only prototype built with React + Vite.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Large circular step counter for a single-day total
+- Small friends leaderboard for visual polish
+- Light/dark theme toggle (persisted to localStorage)
+- Responsive layout for mobile and desktop
 
-## React Compiler
+## Run
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+Install dependencies and start the dev server:
 
-Note: This will impact Vite dev & build performances.
+```bash
+npm install
+npm run dev
+```
 
-## Expanding the ESLint configuration
+Open http://localhost:5173 (or the URL Vite prints) to view the prototype.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Notes
+
+- This is a UI prototype only; there is no backend or navigation.
+- The project name and title are `StepBuddy`.
+
+If you'd like, I can add subtle animations, an auto-step simulator, or a small demo script to generate sample step data.
