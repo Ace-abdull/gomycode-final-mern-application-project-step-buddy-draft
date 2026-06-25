@@ -1,28 +1,50 @@
-# StepBuddy — Walking app prototype
+# WalkUp
 
-StepBuddy is a UI prototype for a simple walking app landing page. It demonstrates a polished circular step counter, a small friends list, and a light/dark toggle. This repository is a front-end-only prototype built with React + Vite.
+WalkUp is a polished landing-page prototype for a walking tracker app. It focuses on a clean circular step counter, daily progress stats, and a compact friends preview without any backend, routing, or off-page navigation.
 
 ## Features
 
-- Large circular step counter for a single-day total
-- Small friends leaderboard for visual polish
-- Light/dark theme toggle (persisted to localStorage)
-- Responsive layout for mobile and desktop
+- Circular daily step counter with progress, goal, remaining steps, and completion percentage
+- Lightweight prototype controls for adding sample steps and resetting the counter
+- Streak, pace, and energy stat cards
+- Walking crew preview with friend step totals
+- Light and dark theme toggle with localStorage persistence
+- Responsive layout for desktop and mobile screens
 
-## Run
+## Tech Stack
 
-Install dependencies and start the dev server:
+- React
+- Vite
+- CSS
+
+## Run Locally
+
+Install dependencies:
 
 ```bash
 npm install
+```
+
+Start the development server:
+
+```bash
 npm run dev
 ```
 
-Open http://localhost:5173 (or the URL Vite prints) to view the prototype.
+Open the URL Vite prints, usually:
+
+```text
+http://localhost:5173
+```
+
+## Build
+
+Create a production build:
+
+```bash
+npm run build
+```
 
 ## Notes
 
-- This is a UI prototype only; there is no backend or navigation.
-- The project name and title are `StepBuddy`.
-
-If you'd like, I can add subtle animations, an auto-step simulator, or a small demo script to generate sample step data.
+This is a front-end-only UI prototype. The landing page is intentionally static apart from the local theme toggle and sample counter buttons.
