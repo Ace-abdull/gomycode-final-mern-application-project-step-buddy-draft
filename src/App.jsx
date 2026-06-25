@@ -1,122 +1,104 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import { useEffect, useState } from "react";
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [steps, setSteps] = useState(() => 3245);
+  const [dark, setDark] = useState(() => {
+    try {
+      const saved = localStorage.getItem("theme");
+      if (saved) return saved === "dark";
+      return (
+        window.matchMedia &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches
+      );
+    } catch (e) {
+      return false;
+    }
+  });
+
+  useEffect(() => {
+    document.documentElement.setAttribute(
+      "data-theme",
+      dark ? "dark" : "light",
+    );
+    try {
+      localStorage.setItem("theme", dark ? "dark" : "light");
+    } catch (e) {}
+  }, [dark]);
+
+  const friends = [
+    { name: "Amina", steps: 10234 },
+    { name: "Sam", steps: 8234 },
+    { name: "Lina", steps: 5560 },
+    { name: "Omar", steps: 4123 },
+  ];
+
+  function addSteps(n = 200) {
+    setSteps((s) => s + n);
+  }
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
+    <div className="landing">
+      <header className="topbar">
+        <div className="brand">
+          <h1>StepBuddy</h1>
+          <p className="tag">Walking prototype</p>
         </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
+        <div className="controls">
+          <button
+            className="theme-toggle"
+            onClick={() => setDark((d) => !d)}
+            aria-label="Toggle theme"
+          >
+            {dark ? "🌙" : "☀️"}
+          </button>
         </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+      </header>
 
-      <div className="ticks"></div>
+      <main className="home">
+        <section className="hero-card">
+          <div className="steps">
+            <h2>Today</h2>
+            <div className="circle">
+              <div className="steps-count">{steps.toLocaleString()}</div>
+              <div className="steps-label">steps</div>
+            </div>
+            <div className="actions">
+              <button className="primary" onClick={() => addSteps(500)}>
+                +500
+              </button>
+              <button className="secondary" onClick={() => setSteps(0)}>
+                Reset
+              </button>
+            </div>
+          </div>
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+          <div className="friends">
+            <h3>Friends</h3>
+            <ul>
+              {friends.map((f) => (
+                <li key={f.name} className="friend">
+                  <div className="avatar" aria-hidden>
+                    {f.name[0]}
+                  </div>
+                  <div className="meta">
+                    <div className="name">{f.name}</div>
+                    <div className="fsteps">
+                      {f.steps.toLocaleString()} steps
+                    </div>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+        <section className="info">
+          <p>Polished UI prototype. No navigation — just a landing page.</p>
+        </section>
+      </main>
+    </div>
+  );
 }
 
-export default App
+export default App;
